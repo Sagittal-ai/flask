@@ -1,1 +1,50 @@
 /* nested file */
+
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+form {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+input, textarea, select {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.toggle-button {
+    position: relative;
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-button:before {
+    content: '';
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+    transition: transform 0.3s;
+}
+
+.toggle-button.active {
+    background-color: #4cd964;
+}
+
+.toggle-button.active:before {
+    transform: translateX(25px);
+}
