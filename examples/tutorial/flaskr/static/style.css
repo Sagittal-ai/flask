@@ -132,3 +132,31 @@ input[type=submit] {
   align-self: start;
   min-width: 10em;
 }
+
+/* Dark mode styles */
+body.dark-mode {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode nav {
+  background: #1e1e1e;
+}
+
+body.dark-mode .flash {
+  background: #333;
+  border-color: #555;
+}
+
+body.dark-mode a {
+  color: #bb86fc;
+}
+
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode h4, 
+body.dark-mode h5, 
+body.dark-mode h6 {
+  color: #bb86fc;
+}
