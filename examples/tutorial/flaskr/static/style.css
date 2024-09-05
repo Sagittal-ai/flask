@@ -132,3 +132,36 @@ input[type=submit] {
   align-self: start;
   min-width: 10em;
 }
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #121212;
+  }
+
+  body {
+    background: #1e1e1e;
+    color: #e0e0e0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #bb86fc;
+  }
+
+  a {
+    color: #bb86fc;
+  }
+
+  nav {
+    background: #333;
+  }
+
+  .flash {
+    background: #333;
+    border: 1px solid #bb86fc;
+  }
+
+  .post .about {
+    color: #a0a0a0;
+  }
+}
