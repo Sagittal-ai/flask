@@ -6,23 +6,31 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
+import math
+import markdown2
 
 from .auth import login_required
 from .db import get_db
 
 bp = Blueprint("blog", __name__)
 
+POSTS_PER_PAGE = 10
 
 @bp.route("/")
 def index():
     """Show all the posts, most recent first."""
+    page = request.args.get('page', 1, type=int)
     db = get_db()
+    total_posts = db.execute("SELECT COUNT(id) FROM post").fetchone()[0]
+    total_pages = math.ceil(total_posts / POSTS_PER_PAGE)
     posts = db.execute(
         "SELECT p.id, title, body, created, author_id, username"
         " FROM post p JOIN user u ON p.author_id = u.id"
         " ORDER BY created DESC"
+        " LIMIT ? OFFSET ?",
+        (POSTS_PER_PAGE, (page - 1) * POSTS_PER_PAGE)
     ).fetchall()
-    return render_template("blog/index.html", posts=posts)
+    return render_template("blog/index.html", posts=posts, page=page, total_pages=total_pages)
 
 
 def get_post(id, check_author=True):
