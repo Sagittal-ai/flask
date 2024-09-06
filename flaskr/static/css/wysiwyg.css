@@ -1,0 +1,23 @@
+```css
+.cke {
+    visibility: visible;
+}
+
+.cke_top {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.cke_bottom {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+}
+
+.cke_contents {
+    min-height: 200px;
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 10px;
+    background-color: white;
+}
+```
