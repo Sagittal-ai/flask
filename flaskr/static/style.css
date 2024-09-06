@@ -132,3 +132,15 @@ input[type=submit] {
   align-self: start;
   min-width: 10em;
 }
+
+.toggle-body {
+  background-color: #377ba8;
+  color: white;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+}
+
+.toggle-body:hover {
+  background-color: #285a7a;
+}
