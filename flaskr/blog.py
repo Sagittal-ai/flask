@@ -25,6 +25,7 @@ def index():
     ).fetchall()
     
     # Convert markdown to HTML for each post body
+    posts = [dict(post) for post in posts]  # Convert sqlite3.Row to dict
     for post in posts:
         post['body'] = markdown.markdown(post['body'])
     
