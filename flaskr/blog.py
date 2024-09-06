@@ -60,7 +60,7 @@ def get_post(id, check_author=True):
         abort(403)
 
     # Convert markdown to HTML for the post body
-    post['body'] = markdown.markdown(post['body'])
+    post = {**post, 'body': markdown.markdown(post['body'])}
 
     return post
 
