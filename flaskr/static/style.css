@@ -52,6 +52,7 @@ nav ul  {
   list-style: none;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 nav ul li a, nav ul li span, header .action {
@@ -161,18 +162,27 @@ input[type=submit]:hover {
   border-radius: 25px;
   cursor: pointer;
   transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #theme-toggle:before {
-  content: '';
+  content: '\f186'; /* FontAwesome Unicode for moon */
+  font-family: 'FontAwesome';
+  font-weight: 900;
   position: absolute;
   top: 2px;
   left: 2px;
   width: 21px;
   height: 21px;
-  background: white;
   border-radius: 50%;
-  transition: transform 0.3s;
+  transition: transform 0.3s, content 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #333;
 }
 
 body.dark-mode #theme-toggle {
@@ -181,6 +191,8 @@ body.dark-mode #theme-toggle {
 
 body.dark-mode #theme-toggle:before {
   transform: translateX(25px);
+  content: '\f185'; /* FontAwesome Unicode for sun */
+  color: #e0e0e0;
 }
 
 body.dark-mode {
