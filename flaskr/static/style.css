@@ -88,6 +88,7 @@ nav ul li a, nav ul li span, header .action {
   display: flex;
   align-items: flex-end;
   font-size: 0.85em;
+  cursor: pointer;
 }
 
 .post > header > div:first-of-type {
@@ -106,6 +107,11 @@ nav ul li a, nav ul li span, header .action {
 
 .post .body {
   white-space: pre-line;
+  display: none;
+}
+
+.post.expanded .body {
+  display: block;
 }
 
 .content:last-child {
