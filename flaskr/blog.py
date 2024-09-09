@@ -18,16 +18,22 @@ bp = Blueprint("blog", __name__)
 def index():
     """Show all the posts, most recent first."""
     db = get_db()
+    page = request.args.get('page', 1, type=int)
+    posts_per_page = 10
+    offset = (page - 1) * posts_per_page
+
     posts = db.execute(
         "SELECT p.id, title, body, created, author_id, username"
         " FROM post p JOIN user u ON p.author_id = u.id"
         " ORDER BY created DESC"
+        " LIMIT ? OFFSET ?",
+        (posts_per_page, offset)
     ).fetchall()
     # Convert markdown to HTML for each post body
     posts = [
         {**post, 'body': markdown.markdown(post['body'])} for post in posts
     ]
-    return render_template("blog/index.html", posts=posts)
+    return render_template("blog/index.html", posts=posts, page=page)
 
 
 def get_post(id, check_author=True):
