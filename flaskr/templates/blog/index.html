@@ -26,21 +26,21 @@
     {% endif %}
   {% endfor %}
 
-  <div class="pagination">
+  <div class="pagination" role="navigation" aria-label="Pagination Navigation">
     {% if page > 1 %}
-      <a href="{{ url_for('blog.index', page=1) }}"><<</a>
-      <a href="{{ url_for('blog.index', page=page-1) }}"><</a>
+      <a href="{{ url_for('blog.index', page=1) }}" aria-label="First Page"><<</a>
+      <a href="{{ url_for('blog.index', page=page-1) }}" aria-label="Previous Page"><</a>
     {% endif %}
     {% for p in range(1, total_pages + 1) %}
       {% if p == page %}
-        <strong>{{ p }}</strong>
+        <strong aria-current="page">{{ p }}</strong>
       {% else %}
-        <a href="{{ url_for('blog.index', page=p) }}">{{ p }}</a>
+        <a href="{{ url_for('blog.index', page=p) }}" aria-label="Page {{ p }}">{{ p }}</a>
       {% endif %}
     {% endfor %}
     {% if page < total_pages %}
-      <a href="{{ url_for('blog.index', page=page+1) }}">></a>
-      <a href="{{ url_for('blog.index', page=total_pages) }}">>></a>
+      <a href="{{ url_for('blog.index', page=page+1) }}" aria-label="Next Page">></a>
+      <a href="{{ url_for('blog.index', page=total_pages) }}" aria-label="Last Page">>></a>
     {% endif %}
   </div>
 
