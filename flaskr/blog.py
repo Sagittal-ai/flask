@@ -10,6 +10,7 @@ import markdown
 
 from .auth import login_required
 from .db import get_db
+from .translations import get_translation
 
 bp = Blueprint("blog", __name__)
 
@@ -27,7 +28,9 @@ def index():
     posts = [
         {**post, 'body': markdown.markdown(post['body'])} for post in posts
     ]
-    return render_template("blog/index.html", posts=posts)
+    # Get translations for the current locale
+    translations = get_translation(g.locale)
+    return render_template("blog/index.html", posts=posts, translations=translations)
 
 
 def get_post(id, check_author=True):
