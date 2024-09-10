@@ -39,6 +39,13 @@ def create_app(test_config=None):
         else:
             g.theme = 'dark' if request.user_agent.platform in ['android', 'iphone'] and request.user_agent.browser in ['chrome', 'safari'] and request.user_agent.string.find('DarkMode') != -1 else 'light'
 
+    @app.before_request
+    def load_locale():
+        locale = request.args.get('locale')
+        if locale not in ['en_GB', 'es_ES']:
+            locale = 'en_GB'
+        g.locale = locale
+
     # register the database commands
     from . import db
 
