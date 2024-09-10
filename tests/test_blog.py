@@ -81,3 +81,13 @@ def test_delete(client, auth, app):
         db = get_db()
         post = db.execute("SELECT * FROM post WHERE id = 1").fetchone()
         assert post is None
+
+
+def test_markdown_rendering(client, auth, app):
+    auth.login()
+    client.post("/create", data={"title": "Markdown Test", "body": "# Heading\n\n*italic* **bold**"})
+
+    response = client.get("/")
+    assert b"<h1>Heading</h1>" in response.data
+    assert b"<em>italic</em>" in response.data
+    assert b"<strong>bold</strong>" in response.data
