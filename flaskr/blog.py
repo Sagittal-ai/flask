@@ -7,12 +7,12 @@ from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
 import markdown
+from flask_babel import _
 
 from .auth import login_required
 from .db import get_db
 
 bp = Blueprint("blog", __name__)
-
 
 @bp.route("/")
 def index():
@@ -72,7 +72,7 @@ def create():
         error = None
 
         if not title:
-            error = "Title is required."
+            error = _("Title is required.")
 
         if error is not None:
             flash(error)
@@ -100,7 +100,7 @@ def update(id):
         error = None
 
         if not title:
-            error = "Title is required."
+            error = _("Title is required.")
 
         if error is not None:
             flash(error)
