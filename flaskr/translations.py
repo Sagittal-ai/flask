@@ -1,17 +1,17 @@
 translations = {
     'en_GB': {
-        'Posts': 'Posts',
-        'Log In': 'Log In',
-        'Log Out': 'Log Out',
-        'New': 'New',
-        'Edit': 'Edit',
+        'posts': 'Posts',
+        'log_in': 'Log In',
+        'log_out': 'Log Out',
+        'new': 'New',
+        'edit': 'Edit',
     },
     'es_ES': {
-        'Posts': 'Entradas',
-        'Log In': 'Iniciar sesion',
-        'Log Out': 'Salir',
-        'New': 'Nuevo',
-        'Edit': 'Editar',
+        'posts': 'Entradas',
+        'log_in': 'Iniciar sesion',
+        'log_out': 'Salir',
+        'new': 'Nuevo',
+        'edit': 'Editar',
     }
 }
 
