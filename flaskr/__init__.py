@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, request, g
-
+from .translations import get_translations
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
@@ -38,6 +38,11 @@ def create_app(test_config=None):
             g.theme = theme
         else:
             g.theme = 'dark' if request.user_agent.platform in ['android', 'iphone'] and request.user_agent.browser in ['chrome', 'safari'] and request.user_agent.string.find('DarkMode') != -1 else 'light'
+
+    @app.before_request
+    def load_locale():
+        locale = request.args.get('locale', 'en')
+        g.translations = get_translations(locale)
 
     # register the database commands
     from . import db

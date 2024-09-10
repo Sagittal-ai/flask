@@ -10,6 +10,7 @@ import markdown
 
 from .auth import login_required
 from .db import get_db
+from .translations import get_translations
 
 bp = Blueprint("blog", __name__)
 
@@ -17,6 +18,9 @@ bp = Blueprint("blog", __name__)
 @bp.route("/")
 def index():
     """Show all the posts, most recent first."""
+    locale = request.args.get('locale', 'en')
+    translations = get_translations(locale)
+    
     db = get_db()
     posts = db.execute(
         "SELECT p.id, title, body, created, author_id, username"
@@ -27,7 +31,7 @@ def index():
     posts = [
         {**post, 'body': markdown.markdown(post['body'])} for post in posts
     ]
-    return render_template("blog/index.html", posts=posts)
+    return render_template("blog/index.html", posts=posts, _=translations.get)
 
 
 def get_post(id, check_author=True):
