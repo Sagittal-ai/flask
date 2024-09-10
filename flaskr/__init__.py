@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, request, g
-
+from .translations import translate
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
@@ -45,6 +45,10 @@ def create_app(test_config=None):
         if locale not in ['en_GB', 'es_ES']:
             locale = 'en_GB'
         g.locale = locale
+
+    @app.context_processor
+    def inject_translate():
+        return dict(translate=translate)
 
     # register the database commands
     from . import db
