@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, request, g
-
+from flask_babel import Babel
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
@@ -12,7 +12,11 @@ def create_app(test_config=None):
         SECRET_KEY="dev",
         # store the database in the instance folder
         DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
+        # supported locales
+        LANGUAGES=['en_GB', 'es_ES']
     )
+
+    babel = Babel(app)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -38,6 +42,13 @@ def create_app(test_config=None):
             g.theme = theme
         else:
             g.theme = 'dark' if request.user_agent.platform in ['android', 'iphone'] and request.user_agent.browser in ['chrome', 'safari'] and request.user_agent.string.find('DarkMode') != -1 else 'light'
+
+    @babel.localeselector
+    def get_locale():
+        locale = request.args.get('locale')
+        if locale in app.config['LANGUAGES']:
+            return locale
+        return request.accept_languages.best_match(app.config['LANGUAGES'])
 
     # register the database commands
     from . import db
