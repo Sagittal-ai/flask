@@ -25,8 +25,9 @@ def index():
     ).fetchall()
 
     # Convert markdown to HTML for each post body
-    for post in posts:
-        post['body'] = markdown.markdown(post['body'])
+    posts = [
+        {**post, 'body': markdown.markdown(post['body'])} for post in posts
+    ]
 
     return render_template("blog/index.html", posts=posts)
 
