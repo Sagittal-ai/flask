@@ -10,6 +10,7 @@
     <input name="title" id="title" value="{{ request.form['title'] }}" required>
     <label for="body">Body</label>
     <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
+    <p><em>Markdown is supported in the body.</em></p>
     <input type="submit" value="Save">
   </form>
 {% endblock %}
