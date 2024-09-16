@@ -9,6 +9,7 @@ from werkzeug.exceptions import abort
 
 from .auth import login_required
 from .db import get_db
+from .translations import get_translation
 
 bp = Blueprint("blog", __name__)
 
@@ -16,13 +17,14 @@ bp = Blueprint("blog", __name__)
 @bp.route("/")
 def index():
     """Show all the posts, most recent first."""
+    locale = request.args.get('locale', 'en_GB')
     db = get_db()
     posts = db.execute(
         "SELECT p.id, title, body, created, author_id, username"
         " FROM post p JOIN user u ON p.author_id = u.id"
         " ORDER BY created DESC"
     ).fetchall()
-    return render_template("blog/index.html", posts=posts)
+    return render_template("blog/index.html", posts=posts, locale=locale)
 
 
 def get_post(id, check_author=True):
