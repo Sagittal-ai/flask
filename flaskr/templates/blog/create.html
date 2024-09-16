@@ -12,4 +12,9 @@
     <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
     <input type="submit" value="Save">
   </form>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var simplemde = new SimpleMDE({ element: document.getElementById("body") });
+    });
+  </script>
 {% endblock %}

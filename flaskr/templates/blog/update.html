@@ -16,4 +16,9 @@
   <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
     <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
   </form>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var simplemde = new SimpleMDE({ element: document.getElementById("body") });
+    });
+  </script>
 {% endblock %}
