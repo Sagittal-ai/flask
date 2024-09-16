@@ -32,7 +32,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @babel.localeselector()
+    @babel.localeselector
     def get_locale():
         return request.args.get('locale') or request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
 
