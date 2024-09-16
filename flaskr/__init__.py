@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, request, g
-
+from flask_babel import Babel, _
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
@@ -12,7 +12,12 @@ def create_app(test_config=None):
         SECRET_KEY="dev",
         # store the database in the instance folder
         DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
+        # configuration for Flask-Babel
+        BABEL_DEFAULT_LOCALE='en',
+        BABEL_SUPPORTED_LOCALES=['en', 'es', 'fr']
     )
+
+    babel = Babel(app)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -27,9 +32,13 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    @babel.localeselector
+    def get_locale():
+        return request.args.get('locale') or request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
+
     @app.route("/hello")
     def hello():
-        return "Hello, World!"
+        return _("Hello, World!")
 
     @app.before_request
     def load_theme_preference():

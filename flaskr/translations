@@ -1,0 +1,135 @@
+```
+flaskr/
+    translations/
+        en/
+            LC_MESSAGES/
+                messages.po
+                messages.mo
+        es/
+            LC_MESSAGES/
+                messages.po
+                messages.mo
+        fr/
+            LC_MESSAGES/
+                messages.po
+                messages.mo
+```
+
+**messages.po (English)**
+```
+msgid "Hello, World!"
+msgstr "Hello, World!"
+
+msgid "Toggle Dark Mode"
+msgstr "Toggle Dark Mode"
+
+msgid "Log Out"
+msgstr "Log Out"
+
+msgid "Register"
+msgstr "Register"
+
+msgid "Log In"
+msgstr "Log In"
+
+msgid "Posts"
+msgstr "Posts"
+
+msgid "New"
+msgstr "New"
+
+msgid "by"
+msgstr "by"
+
+msgid "on"
+msgstr "on"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Password"
+msgstr "Password"
+```
+
+**messages.po (Spanish)**
+```
+msgid "Hello, World!"
+msgstr "¡Hola, Mundo!"
+
+msgid "Toggle Dark Mode"
+msgstr "Alternar Modo Oscuro"
+
+msgid "Log Out"
+msgstr "Cerrar sesión"
+
+msgid "Register"
+msgstr "Registrarse"
+
+msgid "Log In"
+msgstr "Iniciar sesión"
+
+msgid "Posts"
+msgstr "Publicaciones"
+
+msgid "New"
+msgstr "Nuevo"
+
+msgid "by"
+msgstr "por"
+
+msgid "on"
+msgstr "en"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Username"
+msgstr "Nombre de usuario"
+
+msgid "Password"
+msgstr "Contraseña"
+```
+
+**messages.po (French)**
+```
+msgid "Hello, World!"
+msgstr "Bonjour, le monde!"
+
+msgid "Toggle Dark Mode"
+msgstr "Basculer en mode sombre"
+
+msgid "Log Out"
+msgstr "Se déconnecter"
+
+msgid "Register"
+msgstr "S'inscrire"
+
+msgid "Log In"
+msgstr "Se connecter"
+
+msgid "Posts"
+msgstr "Articles"
+
+msgid "New"
+msgstr "Nouveau"
+
+msgid "by"
+msgstr "par"
+
+msgid "on"
+msgstr "le"
+
+msgid "Edit"
+msgstr "Modifier"
+
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+msgid "Password"
+msgstr "Mot de passe"
+```
+
+**Note**: The `.mo` files are binary files generated from the `.po` files using the `msgfmt` tool. They are not included here as they need to be compiled from the `.po` files.

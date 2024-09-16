@@ -6,16 +6,16 @@
   <a href="{{ url_for('index') }}"><img id="sagittal-logo" src="{{ url_for('static', filename='sagittal.svg') }}"></a>
   <ul>
     <li>
-      <div id="theme-toggle" aria-label="Toggle Dark Mode">
+      <div id="theme-toggle" aria-label="{{ _('Toggle Dark Mode') }}">
         <!-- <i id="theme-icon" class="fas fa-moon"></i> -->
       </div>
     </li>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      <li><a href="{{ url_for('auth.logout') }}">{{ _('Log Out') }}</a>
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+      <li><a href="{{ url_for('auth.register') }}">{{ _('Register') }}</a>
+      <li><a href="{{ url_for('auth.login') }}">{{ _('Log In') }}</a>
     {% endif %}
   </ul>
 </nav>
