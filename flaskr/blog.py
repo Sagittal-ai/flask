@@ -25,11 +25,13 @@ def index():
     ).fetchall()
     
     # Convert markdown to HTML for each post body
+    posts_list = []
     for post in posts:
-        post = dict(post)
-        post['body'] = markdown.markdown(post['body'])
+        post_dict = dict(post)
+        post_dict['body'] = markdown.markdown(post_dict['body'])
+        posts_list.append(post_dict)
     
-    return render_template("blog/index.html", posts=posts)
+    return render_template("blog/index.html", posts=posts_list)
 
 
 def get_post(id, check_author=True):
