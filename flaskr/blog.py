@@ -26,6 +26,7 @@ def index():
     
     # Convert markdown to HTML for each post body
     for post in posts:
+        post = dict(post)
         post['body'] = markdown.markdown(post['body'])
     
     return render_template("blog/index.html", posts=posts)
@@ -61,6 +62,7 @@ def get_post(id, check_author=True):
         abort(403)
 
     # Convert markdown to HTML for the post body
+    post = dict(post)
     post['body'] = markdown.markdown(post['body'])
 
     return post
