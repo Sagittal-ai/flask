@@ -10,9 +10,10 @@
         <!-- <i id="theme-icon" class="fas fa-moon"></i> -->
       </div>
     </li>
+    {% set locale = request.args.get('locale', 'en_GB') %}
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      <li><a href="{{ url_for('auth.logout') }}">{{ 'Log Out' if locale == 'en_GB' else 'Salir' }}</a>
     {% else %}
       <li><a href="{{ url_for('auth.register') }}">Register</a>
       <li><a href="{{ url_for('auth.login') }}">Log In</a>
