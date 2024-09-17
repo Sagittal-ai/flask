@@ -15,8 +15,8 @@
       <li><span>{{ g.user['username'] }}</span>
       <li><a href="{{ url_for('auth.logout') }}">{{ 'Log Out' if locale == 'en_GB' else 'Salir' }}</a>
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+      <li><a href="{{ url_for('auth.register') }}">{{ 'Register' if locale == 'en_GB' else 'Registrarse' }}</a>
+      <li><a href="{{ url_for('auth.login') }}">{{ 'Log In' if locale == 'en_GB' else 'Iniciar sesion' }}</a>
     {% endif %}
   </ul>
 </nav>
