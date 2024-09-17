@@ -26,6 +26,19 @@
       <hr>
     {% endif %}
   {% endfor %}
+  
+  <div class="pagination">
+    {% if page > 1 %}
+      <a href="{{ url_for('blog.index', page=1) }}">First</a>
+      <a href="{{ url_for('blog.index', page=page-1) }}">Previous</a>
+    {% endif %}
+    <span>Page {{ page }} of {{ total_pages }}</span>
+    {% if page < total_pages %}
+      <a href="{{ url_for('blog.index', page=page+1) }}">Next</a>
+      <a href="{{ url_for('blog.index', page=total_pages) }}">Last</a>
+    {% endif %}
+  </div>
+
   <script>
     function toggleContent(button) {
       const body = button.parentElement.nextElementSibling;
