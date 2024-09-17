@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, request, g
 import markdown
-
+from flask_babel import Babel
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
@@ -13,6 +13,9 @@ def create_app(test_config=None):
         SECRET_KEY="dev",
         # store the database in the instance folder
         DATABASE=os.path.join(app.instance_path, "flaskr.sqlite"),
+        # configuration for Flask-Babel
+        BABEL_DEFAULT_LOCALE='en',
+        BABEL_SUPPORTED_LOCALES=['en', 'es', 'fr']
     )
 
     if test_config is None:
@@ -27,6 +30,12 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+
+    babel = Babel(app)
+
+    @babel.localeselector
+    def get_locale():
+        return request.accept_languages.best_match(app.config['BABEL_SUPPORTED_LOCALES'])
 
     @app.route("/hello")
     def hello():

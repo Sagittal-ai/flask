@@ -10,6 +10,7 @@ from flask import session
 from flask import url_for
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
+from flask_babel import _
 
 from .db import get_db
 
@@ -57,9 +58,9 @@ def register():
         error = None
 
         if not username:
-            error = "Username is required."
+            error = _("Username is required.")
         elif not password:
-            error = "Password is required."
+            error = _("Password is required.")
 
         if error is None:
             try:
@@ -71,7 +72,7 @@ def register():
             except db.IntegrityError:
                 # The username was already taken, which caused the
                 # commit to fail. Show a validation error.
-                error = f"User {username} is already registered."
+                error = _("User {username} is already registered.").format(username=username)
             else:
                 # Success, go to the login page.
                 return redirect(url_for("auth.login"))
@@ -94,9 +95,9 @@ def login():
         ).fetchone()
 
         if user is None:
-            error = "Incorrect username."
+            error = _("Incorrect username.")
         elif not check_password_hash(user["password"], password):
-            error = "Incorrect password."
+            error = _("Incorrect password.")
 
         if error is None:
             # store the user id in a new session and return to the index

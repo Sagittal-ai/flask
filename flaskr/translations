@@ -1,0 +1,237 @@
+The `flaskr/translations` directory will contain subdirectories for each language, and within each language directory, there will be a `LC_MESSAGES` directory containing `.po` and `.mo` files for translations. Here is the structure and content for English and Spanish translations:
+
+```
+flaskr/translations/
+    ├── en/
+    │   └── LC_MESSAGES/
+    │       ├── messages.po
+    │       └── messages.mo
+    └── es/
+        └── LC_MESSAGES/
+            ├── messages.po
+            └── messages.mo
+```
+
+For demonstration purposes, I'll provide the content for the `messages.po` files for English and Spanish. The `.mo` files are binary files generated from the `.po` files and cannot be directly written here.
+
+**flaskr/translations/en/LC_MESSAGES/messages.po**
+```
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+msgid "Register"
+msgstr "Register"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Log In"
+msgstr "Log In"
+
+msgid "Today in history"
+msgstr "Today in history"
+
+msgid "New"
+msgstr "New"
+
+msgid "by"
+msgstr "by"
+
+msgid "on"
+msgstr "on"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Expand"
+msgstr "Expand"
+
+msgid "Post Image"
+msgstr "Post Image"
+
+msgid "First"
+msgstr "First"
+
+msgid "Previous"
+msgstr "Previous"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "of"
+msgstr "of"
+
+msgid "Next"
+msgstr "Next"
+
+msgid "Last"
+msgstr "Last"
+
+msgid "Collapse"
+msgstr "Collapse"
+
+msgid "New Post"
+msgstr "New Post"
+
+msgid "Title"
+msgstr "Title"
+
+msgid "Body (Markdown supported)"
+msgstr "Body (Markdown supported)"
+
+msgid "Upload Image"
+msgstr "Upload Image"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Are you sure?"
+msgstr "Are you sure?"
+
+msgid "Toggle Dark Mode"
+msgstr "Toggle Dark Mode"
+
+msgid "Log Out"
+msgstr "Log Out"
+
+msgid "Username is required."
+msgstr "Username is required."
+
+msgid "Password is required."
+msgstr "Password is required."
+
+msgid "User {username} is already registered."
+msgstr "User {username} is already registered."
+
+msgid "Incorrect username."
+msgstr "Incorrect username."
+
+msgid "Incorrect password."
+msgstr "Incorrect password."
+
+msgid "Post id {id} doesn't exist."
+msgstr "Post id {id} doesn't exist."
+
+msgid "Title is required."
+msgstr "Title is required."
+```
+
+**flaskr/translations/es/LC_MESSAGES/messages.po**
+```
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: es\n"
+
+msgid "Register"
+msgstr "Registrarse"
+
+msgid "Username"
+msgstr "Nombre de usuario"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Log In"
+msgstr "Iniciar sesión"
+
+msgid "Today in history"
+msgstr "Hoy en la historia"
+
+msgid "New"
+msgstr "Nuevo"
+
+msgid "by"
+msgstr "por"
+
+msgid "on"
+msgstr "en"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Expand"
+msgstr "Expandir"
+
+msgid "Post Image"
+msgstr "Imagen del post"
+
+msgid "First"
+msgstr "Primero"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Page"
+msgstr "Página"
+
+msgid "of"
+msgstr "de"
+
+msgid "Next"
+msgstr "Siguiente"
+
+msgid "Last"
+msgstr "Último"
+
+msgid "Collapse"
+msgstr "Colapsar"
+
+msgid "New Post"
+msgstr "Nueva publicación"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Body (Markdown supported)"
+msgstr "Cuerpo (Markdown soportado)"
+
+msgid "Upload Image"
+msgstr "Subir imagen"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Are you sure?"
+msgstr "¿Estás seguro?"
+
+msgid "Toggle Dark Mode"
+msgstr "Alternar modo oscuro"
+
+msgid "Log Out"
+msgstr "Cerrar sesión"
+
+msgid "Username is required."
+msgstr "Se requiere nombre de usuario."
+
+msgid "Password is required."
+msgstr "Se requiere contraseña."
+
+msgid "User {username} is already registered."
+msgstr "El usuario {username} ya está registrado."
+
+msgid "Incorrect username."
+msgstr "Nombre de usuario incorrecto."
+
+msgid "Incorrect password."
+msgstr "Contraseña incorrecta."
+
+msgid "Post id {id} doesn't exist."
+msgstr "El post con id {id} no existe."
+
+msgid "Title is required."
+msgstr "Se requiere título."
+```
+
+To generate the `.mo` files from the `.po` files, you would typically use the `msgfmt` command-line tool.

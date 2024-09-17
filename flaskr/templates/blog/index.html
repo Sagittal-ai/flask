@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Today in history{% endblock %}</h1>
+  <h1>{% block title %}{{ _('Today in history') }}{% endblock %}</h1>
   {% if g.user %}
-    <a class="action" href="{{ url_for('blog.create') }}">New</a>
+    <a class="action" href="{{ url_for('blog.create') }}">{{ _('New') }}</a>
   {% endif %}
 {% endblock %}
 
@@ -13,16 +13,16 @@
       <header>
         <div>
           <h1>{{ post['title'] }}</h1>
-          <div class="about">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</div>
+          <div class="about">{{ _('by') }} {{ post['username'] }} {{ _('on') }} {{ post['created'].strftime('%Y-%m-%d') }}</div>
         </div>
         {% if g.user['id'] == post['author_id'] %}
-          <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
+          <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">{{ _('Edit') }}</a>
         {% endif %}
-        <button class="toggle-content" onclick="toggleContent(this)">Expand</button>
+        <button class="toggle-content" onclick="toggleContent(this)">{{ _('Expand') }}</button>
       </header>
       <div style="display:none">
       {% if post['image'] %}
-        <img src="{{ url_for('static', filename='uploads/' ~ post['image']) }}" alt="Post Image" style="max-width: 100%; height: auto;">
+        <img src="{{ url_for('static', filename='uploads/' ~ post['image']) }}" alt="{{ _('Post Image') }}" style="max-width: 100%; height: auto;">
       {% endif %}
         <div class="body">{{ post['body'] | safe}}</div>
       </div>
@@ -34,13 +34,13 @@
   
   <div class="pagination">
     {% if page > 1 %}
-      <a href="{{ url_for('blog.index', page=1) }}">First</a>
-      <a href="{{ url_for('blog.index', page=page-1) }}">Previous</a>
+      <a href="{{ url_for('blog.index', page=1) }}">{{ _('First') }}</a>
+      <a href="{{ url_for('blog.index', page=page-1) }}">{{ _('Previous') }}</a>
     {% endif %}
-    <span>Page {{ page }} of {{ total_pages }}</span>
+    <span>{{ _('Page') }} {{ page }} {{ _('of') }} {{ total_pages }}</span>
     {% if page < total_pages %}
-      <a href="{{ url_for('blog.index', page=page+1) }}">Next</a>
-      <a href="{{ url_for('blog.index', page=total_pages) }}">Last</a>
+      <a href="{{ url_for('blog.index', page=page+1) }}">{{ _('Next') }}</a>
+      <a href="{{ url_for('blog.index', page=total_pages) }}">{{ _('Last') }}</a>
     {% endif %}
   </div>
 
@@ -49,10 +49,10 @@
       const body = button.parentElement.nextElementSibling;
       if (body.style.display === "none") {
         body.style.display = "block";
-        button.textContent = "Collapse";
+        button.textContent = "{{ _('Collapse') }}";
       } else {
         body.style.display = "none";
-        button.textContent = "Expand";
+        button.textContent = "{{ _('Expand') }}";
       }
     }
   </script>

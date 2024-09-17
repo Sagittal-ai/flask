@@ -9,6 +9,7 @@ from werkzeug.exceptions import abort
 import markdown
 import os
 from werkzeug.utils import secure_filename
+from flask_babel import _
 
 from .auth import login_required
 from .db import get_db
@@ -73,7 +74,7 @@ def get_post(id, check_author=True):
     )
 
     if post is None:
-        abort(404, f"Post id {id} doesn't exist.")
+        abort(404, _("Post id {id} doesn't exist.").format(id=id))
 
     if check_author and post["author_id"] != g.user["id"]:
         abort(403)
@@ -92,7 +93,7 @@ def create():
         error = None
 
         if not title:
-            error = "Title is required."
+            error = _("Title is required.")
 
         if image and allowed_file(image.filename):
             filename = secure_filename(image.filename)
@@ -127,7 +128,7 @@ def update(id):
         error = None
 
         if not title:
-            error = "Title is required."
+            error = _("Title is required.")
 
         if image and allowed_file(image.filename):
             filename = secure_filename(image.filename)
