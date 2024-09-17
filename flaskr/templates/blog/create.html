@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
   <form method="post" enctype="multipart/form-data">
     <label for="title">Title</label>
     <input name="title" id="title" value="{{ request.form['title'] }}" required>
@@ -14,4 +17,7 @@
     <input type="file" name="image" id="image" accept="image/*">
     <input type="submit" value="Save">
   </form>
+  <script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("body") });
+  </script>
 {% endblock %}
