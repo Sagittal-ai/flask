@@ -20,7 +20,12 @@
         {% endif %}
         <button class="toggle-content" onclick="toggleContent(this)">Expand</button>
       </header>
-      <div class="body" style="display: none;">{{ post['body'] | safe}}</div>
+      <div style="display:none">
+      {% if post['image'] %}
+        <img src="{{ url_for('static', filename='uploads/' ~ post['image']) }}" alt="Post Image" style="max-width: 100%; height: auto;">
+      {% endif %}
+        <div class="body">{{ post['body'] | safe}}</div>
+      </div>
     </article>
     {% if not loop.last %}
       <hr>
