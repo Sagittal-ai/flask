@@ -23,8 +23,9 @@ def index():
         " FROM post p JOIN user u ON p.author_id = u.id"
         " ORDER BY created DESC"
     ).fetchall()
-    for post in posts:
-        post['body'] = markdown2.markdown(post['body'])
+    posts = [
+        {**post, 'body': markdown2.markdown(post['body'])} for post in posts
+    ]
     return render_template("blog/index.html", posts=posts)
 
 
