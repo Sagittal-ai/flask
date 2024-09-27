@@ -12,7 +12,7 @@ def test_index(client, auth):
     response = client.get("/")
     assert b"test title" in response.data
     assert b"by test on 2018-01-01" in response.data
-    assert b"test\nbody" in response.data
+    assert b"<p>test\nbody</p>" in response.data  # Updated to check for markdown rendering
     assert b'href="/1/update"' in response.data
 
 
@@ -46,7 +46,7 @@ def test_exists_required(client, auth, path):
 def test_create(client, auth, app):
     auth.login()
     assert client.get("/create").status_code == 200
-    client.post("/create", data={"title": "created", "body": ""})
+    client.post("/create", data={"title": "created", "body": "# Heading"})
 
     with app.app_context():
         db = get_db()
@@ -57,12 +57,13 @@ def test_create(client, auth, app):
 def test_update(client, auth, app):
     auth.login()
     assert client.get("/1/update").status_code == 200
-    client.post("/1/update", data={"title": "updated", "body": ""})
+    client.post("/1/update", data={"title": "updated", "body": "**bold text**"})
 
     with app.app_context():
         db = get_db()
         post = db.execute("SELECT * FROM post WHERE id = 1").fetchone()
         assert post["title"] == "updated"
+        assert post["body"] == "**bold text**"
 
 
 @pytest.mark.parametrize("path", ("/create", "/1/update"))
@@ -81,3 +82,12 @@ def test_delete(client, auth, app):
         db = get_db()
         post = db.execute("SELECT * FROM post WHERE id = 1").fetchone()
         assert post is None
+
+
+def test_markdown_rendering(client, auth):
+    auth.login()
+    client.post("/create", data={"title": "Markdown Test", "body": "# Heading\n\n*italic* **bold**"})
+    response = client.get("/")
+    assert b"<h1>Heading</h1>" in response.data
+    assert b"<em>italic</em>" in response.data
+    assert b"<strong>bold</strong>" in response.data

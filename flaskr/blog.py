@@ -6,6 +6,7 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
+import markdown2
 
 from .auth import login_required
 from .db import get_db
@@ -22,6 +23,8 @@ def index():
         " FROM post p JOIN user u ON p.author_id = u.id"
         " ORDER BY created DESC"
     ).fetchall()
+    for post in posts:
+        post['body'] = markdown2.markdown(post['body'])
     return render_template("blog/index.html", posts=posts)
 
 
