@@ -6,6 +6,7 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
+import markdown
 
 from .auth import login_required
 from .db import get_db
@@ -22,6 +23,9 @@ def index():
         " FROM post p JOIN user u ON p.author_id = u.id"
         " ORDER BY created DESC"
     ).fetchall()
+    # Convert Markdown to HTML for each post body
+    for post in posts:
+        post['body'] = markdown.markdown(post['body'])
     return render_template("blog/index.html", posts=posts)
 
 
@@ -73,9 +77,11 @@ def create():
             flash(error)
         else:
             db = get_db()
+            # Convert Markdown to HTML before saving
+            body_html = markdown.markdown(body)
             db.execute(
                 "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)",
-                (title, body, g.user["id"]),
+                (title, body_html, g.user["id"]),
             )
             db.commit()
             return redirect(url_for("blog.index"))
@@ -101,8 +107,10 @@ def update(id):
             flash(error)
         else:
             db = get_db()
+            # Convert Markdown to HTML before saving
+            body_html = markdown.markdown(body)
             db.execute(
-                "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
+                "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body_html, id)
             )
             db.commit()
             return redirect(url_for("blog.index"))
