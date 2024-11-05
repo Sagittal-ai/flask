@@ -12,7 +12,7 @@ def test_index(client, auth):
     response = client.get("/")
     assert b"test title" in response.data
     assert b"by test on 2018-01-01" in response.data
-    assert b"test\nbody" in response.data
+    assert b"<p>test\nbody</p>" in response.data  # Check for HTML paragraph tags
     assert b'href="/1/update"' in response.data
 
 
@@ -46,23 +46,26 @@ def test_exists_required(client, auth, path):
 def test_create(client, auth, app):
     auth.login()
     assert client.get("/create").status_code == 200
-    client.post("/create", data={"title": "created", "body": ""})
+    client.post("/create", data={"title": "created", "body": "# Heading\n\nSome **bold** text."})
 
     with app.app_context():
         db = get_db()
-        count = db.execute("SELECT COUNT(id) FROM post").fetchone()[0]
-        assert count == 2
+        post = db.execute("SELECT * FROM post WHERE title = 'created'").fetchone()
+        assert post is not None
+        assert "<h1>Heading</h1>" in post["body"]
+        assert "<strong>bold</strong>" in post["body"]
 
 
 def test_update(client, auth, app):
     auth.login()
     assert client.get("/1/update").status_code == 200
-    client.post("/1/update", data={"title": "updated", "body": ""})
+    client.post("/1/update", data={"title": "updated", "body": "Updated **body** text."})
 
     with app.app_context():
         db = get_db()
         post = db.execute("SELECT * FROM post WHERE id = 1").fetchone()
         assert post["title"] == "updated"
+        assert "<strong>body</strong>" in post["body"]
 
 
 @pytest.mark.parametrize("path", ("/create", "/1/update"))
