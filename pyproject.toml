@@ -7,6 +7,7 @@ license = {text = "BSD-3-Clause"}
 maintainers = [{name = "Pallets", email = "contact@palletsprojects.com"}]
 dependencies = [
     "flask",
+    "markdown",
 ]
 
 [project.urls]

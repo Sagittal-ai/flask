@@ -46,23 +46,27 @@ def test_exists_required(client, auth, path):
 def test_create(client, auth, app):
     auth.login()
     assert client.get("/create").status_code == 200
-    client.post("/create", data={"title": "created", "body": ""})
+    client.post("/create", data={"title": "created", "body": "# Heading\n\nSome **bold** text and *italic* text."})
 
     with app.app_context():
         db = get_db()
-        count = db.execute("SELECT COUNT(id) FROM post").fetchone()[0]
-        assert count == 2
+        post = db.execute("SELECT * FROM post WHERE id = 2").fetchone()
+        assert post is not None
+        assert "<h1>Heading</h1>" in post["body"]
+        assert "<strong>bold</strong>" in post["body"]
+        assert "<em>italic</em>" in post["body"]
 
 
 def test_update(client, auth, app):
     auth.login()
     assert client.get("/1/update").status_code == 200
-    client.post("/1/update", data={"title": "updated", "body": ""})
+    client.post("/1/update", data={"title": "updated", "body": "Updated **bold** text."})
 
     with app.app_context():
         db = get_db()
         post = db.execute("SELECT * FROM post WHERE id = 1").fetchone()
         assert post["title"] == "updated"
+        assert "<strong>bold</strong>" in post["body"]
 
 
 @pytest.mark.parametrize("path", ("/create", "/1/update"))
