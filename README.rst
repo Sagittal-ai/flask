@@ -53,6 +53,30 @@ Run
 Open http://127.0.0.1:5000 in a browser.
 
 
+Branching for Demo
+------------------
+
+To work with the `oct-9th-demo` branch, follow these steps:
+
+1. Ensure you are on the main branch and have the latest changes:
+
+    $ git checkout main
+    $ git pull origin main
+
+2. Create a new branch for your work:
+
+    $ git checkout -b nov-5th-demo
+
+3. After making your changes, merge them into the `oct-9th-demo` branch:
+
+    $ git checkout oct-9th-demo
+    $ git merge nov-5th-demo
+
+4. Push the changes to the remote repository:
+
+    $ git push origin oct-9th-demo
+
+
 Test
 ----
 
