@@ -6,6 +6,7 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
+import markdown
 
 from .auth import login_required
 from .db import get_db
@@ -73,9 +74,10 @@ def create():
             flash(error)
         else:
             db = get_db()
+            body_html = markdown.markdown(body)
             db.execute(
                 "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)",
-                (title, body, g.user["id"]),
+                (title, body_html, g.user["id"]),
             )
             db.commit()
             return redirect(url_for("blog.index"))
@@ -101,8 +103,9 @@ def update(id):
             flash(error)
         else:
             db = get_db()
+            body_html = markdown.markdown(body)
             db.execute(
-                "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
+                "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body_html, id)
             )
             db.commit()
             return redirect(url_for("blog.index"))
