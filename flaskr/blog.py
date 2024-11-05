@@ -6,6 +6,7 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
+import markdown
 
 from .auth import login_required
 from .db import get_db
@@ -107,6 +108,7 @@ def update(id):
             db.commit()
             return redirect(url_for("blog.index"))
 
+    post['body'] = markdown.markdown(post['body'])
     return render_template("blog/update.html", post=post)
 
 
