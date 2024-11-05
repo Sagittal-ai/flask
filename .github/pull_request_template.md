@@ -23,3 +23,7 @@ Ensure each step in CONTRIBUTING.rst is complete, especially the following:
 - Add an entry in CHANGES.rst summarizing the change and linking to the issue.
 - Add `.. versionchanged::` entries in any relevant code docs.
 -->
+
+<!--
+Note: All pull requests for the Nov 5th Demo should target the oct-9th-demo branch.
+-->
